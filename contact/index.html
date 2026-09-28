@@ -36,65 +36,40 @@
     </div>
     <form class="form-card" id="contact-form">
       <h2>Send us a note</h2>
-      <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" placeholder="First name is fine" required></div>
-      <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" autocomplete="name" placeholder="First name is fine" required></div>
+      <div class="field"><label for="c-phone">Phone number</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555"></div>
+      <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
       <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" placeholder="What's on your mind?" required></textarea></div>
+      <label class="optout"><input type="checkbox" name="no_newsletter" value="yes"> Check if you don't want to hear from us</label>
+      <p class="fine">Sending a note adds you to our gentle monthly newsletter. Unsubscribe anytime.</p>
       <button class="btn btn-plum" type="submit">Send message</button>
       <p class="form-msg" role="status"></p>
     </form>
   </div>
 </section>
 
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="news">
-      <div>
-        <span class="eyebrow">The Moon Pond newsletter</span>
-        <h2>Get gentle news from the pond</h2>
-        <p>New episodes, printable wind-down cards and fresh Moonlight Reading articles, about once a month. No spam, just calm.</p>
-        <form id="news-form">
-          <label class="sr-only" for="n-email">Your email address</label>
-          <input id="n-email" name="email" type="email" placeholder="Your email address" required>
-          <button class="btn btn-plum" type="submit" style="min-width:170px">Join</button>
-        </form>
-        <small>For grown-ups only. Unsubscribe anytime.</small>
-        <p class="form-msg" id="news-msg" role="status" style="margin:10px 0 0"></p>
-      </div>
-      <div class="art"><img src="/img/luma.webp" alt="" loading="lazy"></div>
-    </div>
-  </div>
-</section>
+
 
 <script>
 /* ---- Form settings ----
    CONTACT_ENDPOINT: paste your Formspree form URL (https://formspree.io/f/xxxxxx) to send notes straight to your inbox.
-   NEWSLETTER_ENDPOINT: paste your newsletter signup URL (MailerLite/Formspree) the same way.
-   Until then, both forms open the visitor's email app addressed to Moon Pond. */
+   Every note includes newsletter = yes/no (yes unless the visitor ticked the opt-out box).
+   Until an endpoint is set, the form opens the visitor's email app addressed to Moon Pond. */
 const CONTACT_ENDPOINT = "";
-const NEWSLETTER_ENDPOINT = "";
 const INBOX = "moonpondtv@gmail.com";
-
-async function send(endpoint, data){
-  const r = await fetch(endpoint,{method:"POST",headers:{"Accept":"application/json"},body:data});
-  if(!r.ok) throw new Error("send failed");
-}
 document.getElementById("contact-form").addEventListener("submit", async e=>{
   e.preventDefault(); const f=e.target, msg=f.querySelector(".form-msg"), d=new FormData(f);
+  const newsletter = d.get("no_newsletter") ? "no" : "yes";
+  d.delete("no_newsletter"); d.set("newsletter", newsletter);
   if(CONTACT_ENDPOINT){
-    try{ await send(CONTACT_ENDPOINT,d); f.reset(); msg.textContent="Thank you! Your note floated over to the pond. We'll write back soon."; }
-    catch{ msg.textContent="Hmm, that didn't send. You can email us at "+INBOX+"."; }
+    try{
+      const r=await fetch(CONTACT_ENDPOINT,{method:"POST",headers:{"Accept":"application/json"},body:d});
+      if(!r.ok) throw new Error("send failed");
+      f.reset(); msg.textContent="Thank you! Your note floated over to the pond. We'll write back soon.";
+    }catch(err){ msg.textContent="Hmm, that didn't send. You can email us at "+INBOX+"."; }
   } else {
-    location.href="mailto:"+INBOX+"?subject="+encodeURIComponent("Hello from "+d.get("name"))+"&body="+encodeURIComponent(d.get("message")+"\n\n"+d.get("name")+" ("+d.get("email")+")");
-    msg.textContent="Opening your email app...";
-  }
-});
-document.getElementById("news-form").addEventListener("submit", async e=>{
-  e.preventDefault(); const f=e.target, msg=document.getElementById("news-msg"), d=new FormData(f);
-  if(NEWSLETTER_ENDPOINT){
-    try{ await send(NEWSLETTER_ENDPOINT,d); f.reset(); msg.textContent="You're on the list. See you at the pond!"; }
-    catch{ msg.textContent="Hmm, that didn't go through. Please try again soon."; }
-  } else {
-    location.href="mailto:"+INBOX+"?subject="+encodeURIComponent("Newsletter signup")+"&body="+encodeURIComponent("Please add me to the Moon Pond newsletter: "+d.get("email"));
+    const body=[d.get("message"),"","Name: "+d.get("name"),"Phone: "+(d.get("phone")||"-"),"Email: "+d.get("email"),"Newsletter: "+newsletter].join("\n");
+    location.href="mailto:"+INBOX+"?subject="+encodeURIComponent("Hello from "+d.get("name"))+"&body="+encodeURIComponent(body);
     msg.textContent="Opening your email app...";
   }
 });
