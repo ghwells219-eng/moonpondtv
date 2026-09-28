@@ -55,7 +55,7 @@
    CONTACT_ENDPOINT: paste your Formspree form URL (https://formspree.io/f/xxxxxx) to send notes straight to your inbox.
    Every note includes newsletter = yes/no (yes unless the visitor ticked the opt-out box).
    Until an endpoint is set, the form opens the visitor's email app addressed to Moon Pond. */
-const CONTACT_ENDPOINT = "";
+const CONTACT_ENDPOINT = "https://formspree.io/f/xyezlknl";
 const INBOX = "moonpondtv@gmail.com";
 document.getElementById("contact-form").addEventListener("submit", async e=>{
   e.preventDefault(); const f=e.target, msg=f.querySelector(".form-msg"), d=new FormData(f);
