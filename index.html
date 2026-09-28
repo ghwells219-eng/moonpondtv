@@ -48,9 +48,9 @@
       <p class="lede">Fresh from Moon Pond Kids on YouTube.</p>
     </div>
     <div class="video-grid" id="video-grid">
-      <a class="vcard" href="https://www.youtube.com/shorts/SixNOMADJJM"><div class="thumb"><img src="https://i.ytimg.com/vi/SixNOMADJJM/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div><h3>Meet Luma</h3><p>Calm Breathing for Kids</p></a>
+      <a class="vcard" href="https://www.youtube.com/shorts/SixNOMADJJM" target="_blank" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/SixNOMADJJM/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></div><h3>Meet Luma</h3><p>Calm Breathing for Kids</p></a>
     </div>
-    <div class="center" style="margin-top:40px"><a class="btn btn-ghost" href="https://www.youtube.com/@MoonPondKids">See all on YouTube</a></div>
+    <div class="center" style="margin-top:40px"><a class="btn btn-ghost" href="https://www.youtube.com/@MoonPondKids" target="_blank" rel="noopener">See all on YouTube</a></div>
   </div>
 </section>
 <script>
@@ -62,12 +62,12 @@
     var grid=document.getElementById('video-grid');
     grid.innerHTML=list.slice(0,6).map(function(v){
       var parts=String(v.title).split(' | '); var url=v.url||('https://www.youtube.com/watch?v='+v.id);
-      return '<a class="vcard" href="'+esc(url)+'"><div class="thumb"><img src="https://i.ytimg.com/vi/'+esc(v.id)+'/hqdefault.jpg" alt="" loading="lazy">'+PLAY+'</div><h3>'+esc(parts[0])+'</h3>'+(parts[1]?'<p>'+esc(parts[1])+'</p>':'')+'</a>';
+      return '<a class="vcard" target="_blank" rel="noopener" href="'+esc(url)+'"><div class="thumb"><img src="https://i.ytimg.com/vi/'+esc(v.id)+'/hqdefault.jpg" alt="" loading="lazy">'+PLAY+'</div><h3>'+esc(parts[0])+'</h3>'+(parts[1]?'<p>'+esc(parts[1])+'</p>':'')+'</a>';
     }).join('');
     document.querySelectorAll('[data-intro]').forEach(function(b){
       var who=b.getAttribute('data-intro');
       var v=list.find(function(x){return String(x.title).toLowerCase().indexOf('meet '+who)===0;});
-      if(v){b.href=v.url||('https://www.youtube.com/watch?v='+v.id); b.classList.remove('soon'); b.innerHTML='&#9654; Watch intro';}
+      if(v){b.href=v.url||('https://www.youtube.com/watch?v='+v.id); b.classList.remove('intro-soon'); b.innerHTML='&#9654; Watch intro';}
     });
   }).catch(function(){});
 })();
@@ -82,11 +82,11 @@
       <p class="lede">Five friends, each with their own way to move, breathe and rest.</p>
     </div>
     <div class="friend-grid">
-      <article class="friend"><div class="pic" style="background:#C8B6F2"><img src="/img/luma.webp" alt="Luma" loading="lazy"></div><h3>Luma</h3><p class="role">Breathing buddy</p><p>A moon jelly whose glow shows you when to breathe in and when to breathe out.</p><a class="intro-btn" data-intro="luma" href="https://www.youtube.com/shorts/SixNOMADJJM">&#9654; Watch intro</a></article>
-      <article class="friend"><div class="pic" style="background:#F48A3A"><img src="/img/bop.webp" alt="Bop" loading="lazy"></div><h3>Bop</h3><p class="role">Party leader</p><p>A bouncy little boplet who loves a big stomp and laughs at every wiggle.</p><a class="intro-btn soon" data-intro="bop" href="https://www.youtube.com/@MoonPondKids/shorts">Intro coming soon</a></article>
-      <article class="friend"><div class="pic" style="background:#9C7A5A"><img src="/img/snoozle.webp" alt="Snoozle" loading="lazy" style="width:92%"></div><h3>Snoozle</h3><p class="role">Bedtime guide</p><p>A very slow, very sleepy sloth in a giant cedar, famous for enormous yawns.</p><a class="intro-btn soon" data-intro="snoozle" href="https://www.youtube.com/@MoonPondKids/shorts">Intro coming soon</a></article>
-      <article class="friend"><div class="pic" style="background:#AEF6EA"><img src="/img/nibby.webp" alt="Nibby" loading="lazy" style="width:100%"></div><h3>Nibby</h3><p class="role">Nibby Knowledge</p><p>A curious little snail who knows a lot of wonderful facts and shares them slowly.</p><a class="intro-btn soon" data-intro="nibby" href="https://www.youtube.com/@MoonPondKids/shorts">Intro coming soon</a></article>
-      <article class="friend"><div class="pic" style="background:#B9CBEF"><img src="/img/rumble.webp" alt="Rumble" loading="lazy"></div><h3>Rumble</h3><p class="role">Big feelings</p><p>A small storm cloud learning to rain it out and turn soft and fluffy again.</p><a class="intro-btn soon" data-intro="rumble" href="https://www.youtube.com/@MoonPondKids/shorts">Intro coming soon</a></article>
+      <article class="friend"><div class="pic" style="background:#C8B6F2"><img src="/img/luma.webp" alt="Luma" loading="lazy"></div><h3>Luma</h3><p class="role">Breathing buddy</p><p>A moon jelly whose glow shows you when to breathe in and when to breathe out.</p><a class="intro-btn" data-intro="luma" href="https://www.youtube.com/shorts/SixNOMADJJM" target="_blank" rel="noopener">&#9654; Watch intro</a></article>
+      <article class="friend"><div class="pic" style="background:#F48A3A"><img src="/img/bop.webp" alt="Bop" loading="lazy"></div><h3>Bop</h3><p class="role">Party leader</p><p>A bouncy little boplet who loves a big stomp and laughs at every wiggle.</p><a class="intro-btn intro-soon" data-intro="bop" href="https://www.youtube.com/@MoonPondKids/shorts" target="_blank" rel="noopener">Intro coming soon</a></article>
+      <article class="friend"><div class="pic" style="background:#9C7A5A"><img src="/img/snoozle.webp" alt="Snoozle" loading="lazy" style="width:92%"></div><h3>Snoozle</h3><p class="role">Bedtime guide</p><p>A very slow, very sleepy sloth in a giant cedar, famous for enormous yawns.</p><a class="intro-btn intro-soon" data-intro="snoozle" href="https://www.youtube.com/@MoonPondKids/shorts" target="_blank" rel="noopener">Intro coming soon</a></article>
+      <article class="friend"><div class="pic" style="background:#AEF6EA"><img src="/img/nibby.webp" alt="Nibby" loading="lazy" style="width:100%"></div><h3>Nibby</h3><p class="role">Nibby Knowledge</p><p>A curious little snail who knows a lot of wonderful facts and shares them slowly.</p><a class="intro-btn intro-soon" data-intro="nibby" href="https://www.youtube.com/@MoonPondKids/shorts" target="_blank" rel="noopener">Intro coming soon</a></article>
+      <article class="friend"><div class="pic" style="background:#B9CBEF"><img src="/img/rumble.webp" alt="Rumble" loading="lazy"></div><h3>Rumble</h3><p class="role">Big feelings</p><p>A small storm cloud learning to rain it out and turn soft and fluffy again.</p><a class="intro-btn intro-soon" data-intro="rumble" href="https://www.youtube.com/@MoonPondKids/shorts" target="_blank" rel="noopener">Intro coming soon</a></article>
     </div>
   </div>
 </section>
@@ -166,12 +166,12 @@
       <p class="lede">New episodes are on YouTube. Subscribe so you never miss a Party.</p>
     </div>
     <div class="channels" style="text-align:left">
-      <a class="channel" href="https://www.youtube.com/@MoonPondKids"><h3>Moon Pond Kids</h3><p class="handle">@MoonPondKids</p><p>The show for kids 3 to 8: dance-alongs, breathing and bedtime.</p></a>
-      <a class="channel" href="https://www.youtube.com/@MoonPondTV"><h3>Moon Pond</h3><p class="handle">@MoonPondTV</p><p>For parents, bigger kids and grown-ups who want to slow down too.</p></a>
+      <a class="channel" href="https://www.youtube.com/@MoonPondKids" target="_blank" rel="noopener"><h3>Moon Pond Kids</h3><p class="handle">@MoonPondKids</p><p>The show for kids 3 to 8: dance-alongs, breathing and bedtime.</p></a>
+      <a class="channel" href="https://www.youtube.com/@MoonPondTV" target="_blank" rel="noopener"><h3>Moon Pond</h3><p class="handle">@MoonPondTV</p><p>For parents, bigger kids and grown-ups who want to slow down too.</p></a>
     </div>
     <div class="pills">
-      <a class="pill" href="https://www.instagram.com/moonpondtv">Instagram</a>
-      <a class="pill" href="https://www.tiktok.com/@moonpondtv">TikTok</a>
+      <a class="pill" href="https://www.instagram.com/moonpondtv" target="_blank" rel="noopener">Instagram</a>
+      <a class="pill" href="https://www.tiktok.com/@moonpondtv" target="_blank" rel="noopener">TikTok</a>
       <a class="pill" href="/contact/">Say hello</a>
     </div>
   </div>
@@ -181,7 +181,7 @@
 <p class="gn fredoka">Goodnight, Moon Pond.</p>
 <p class="love">And just remember... I love you to the moon and back.</p>
 <p>Gentle movement, breathing and bedtime play, made for families to enjoy together.</p>
-<nav><a href="/moonlight-reading/">Moonlight Reading</a><a href="/contact/">Contact</a><a href="https://www.youtube.com/@MoonPondKids">YouTube</a><a href="https://www.instagram.com/moonpondtv">Instagram</a><a href="https://www.tiktok.com/@moonpondtv">TikTok</a></nav>
+<nav><a href="/moonlight-reading/">Moonlight Reading</a><a href="/contact/">Contact</a><a href="https://www.youtube.com/@MoonPondKids" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/moonpondtv" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@moonpondtv" target="_blank" rel="noopener">TikTok</a></nav>
 <small>&copy; 2026 Moon Pond &middot; moonpondtv.com</small>
 </div></footer>
 <a class="float-contact" href="/contact/" aria-label="Contact us"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg>Contact us</a>

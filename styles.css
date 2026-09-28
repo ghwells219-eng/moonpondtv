@@ -224,10 +224,15 @@ section{padding:90px 0}
 .friend{display:flex;flex-direction:column;align-items:center}
 .friend > p:not(.role){margin-bottom:18px}
 .intro-btn{margin-top:auto;display:inline-flex;align-items:center;gap:6px;background:var(--plum);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:10px 16px;border-radius:999px}
-.intro-btn.soon{background:transparent;color:var(--ink);border:2px solid var(--lav)}
+.intro-btn.intro-soon{background:transparent;color:var(--ink);border:2px solid var(--lav)}
 .mood{min-height:0;padding-bottom:190px}
 .mood .star{position:absolute;left:32px;bottom:36px;padding:0;margin:0;max-width:48%}
 .mood img{right:26px;bottom:24px;width:140px!important;height:140px;object-fit:contain}
 .optout{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:2px 0 4px;cursor:pointer}
 .optout input{width:14px;height:14px;margin:0}
 .fine{font-size:12px;color:var(--muted);margin-bottom:20px}
+
+/* ---- v3: routine cards keep characters in flow so they never overlap text ---- */
+.mood{padding-bottom:34px}
+.mood img{position:static!important;align-self:flex-end;margin-top:auto;width:130px!important;height:130px;object-fit:contain}
+.mood .star{position:static;margin:14px 0 0;padding:0;max-width:none}
