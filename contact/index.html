@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Moon Pond</title>
+<meta name="description" content="Say hello at the pond, or join the Moon Pond newsletter.">
+<meta property="og:title" content="Contact Moon Pond">
+<meta property="og:description" content="Say hello at the pond, or join the Moon Pond newsletter.">
+<meta property="og:image" content="https://moonpondtv.com/img/logo.webp">
+<meta property="og:url" content="https://moonpondtv.com/contact/">
+<meta name="theme-color" content="#FEF3E4">
+<link rel="icon" type="image/png" href="/img/luma.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="nav"><div class="wrap">
+<a class="logo" href="/" aria-label="Moon Pond home"><img src="/img/logo.webp" alt="Moon Pond" width="112" height="112"></a>
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="const u=document.getElementById('menu');u.classList.toggle('open');this.setAttribute('aria-expanded',u.classList.contains('open'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<ul id="menu"><li><a href="/#friends">Friends</a></li><li><a href="/#moon-pond-kids">Explore</a></li><li><a href="/#for-grown-ups">For grown-ups</a></li><li><a href="/moonlight-reading/">Moonlight Reading</a></li><li><a href="/#watch">Watch</a></li><li><a href="/contact/" aria-current="page">Contact</a></li></ul>
+</div></header>
+<main>
+<section class="contact-top" style="position:relative;overflow:hidden">
+  <span class="blob" style="width:300px;height:300px;left:-120px;top:90px;background:#F8E3A8;opacity:.6"></span>
+  <span class="blob" style="width:360px;height:360px;right:-100px;top:30px;background:#AEF6EA;opacity:.35"></span>
+  <div class="wrap" style="position:relative">
+    <div>
+      <span class="eyebrow">Contact Moon Pond</span>
+      <h1>Say hello at the pond</h1>
+      <p class="intro">Questions, ideas, or a story about how Moon Pond fits into your family's evenings? We'd love to hear it. Send a note and we'll write back.</p>
+      <span class="label">EMAIL US DIRECTLY</span>
+      <a class="email-link" href="mailto:moonpondtv@gmail.com">moonpondtv@gmail.com</a>
+      <span class="label">FOLLOW ALONG</span>
+      <div class="social"><a href="https://www.instagram.com/moonpondtv">Instagram</a><a href="https://www.tiktok.com/@moonpondtv">TikTok</a><a href="https://www.youtube.com/@MoonPondKids">YouTube</a></div>
+    </div>
+    <form class="form-card" id="contact-form">
+      <h2>Send us a note</h2>
+      <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" placeholder="First name is fine" required></div>
+      <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" placeholder="What's on your mind?" required></textarea></div>
+      <button class="btn btn-plum" type="submit">Send message</button>
+      <p class="form-msg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="news">
+      <div>
+        <span class="eyebrow">The Moon Pond newsletter</span>
+        <h2>Get gentle news from the pond</h2>
+        <p>New episodes, printable wind-down cards and fresh Moonlight Reading articles, about once a month. No spam, just calm.</p>
+        <form id="news-form">
+          <label class="sr-only" for="n-email">Your email address</label>
+          <input id="n-email" name="email" type="email" placeholder="Your email address" required>
+          <button class="btn btn-plum" type="submit" style="min-width:170px">Join</button>
+        </form>
+        <small>For grown-ups only. Unsubscribe anytime.</small>
+        <p class="form-msg" id="news-msg" role="status" style="margin:10px 0 0"></p>
+      </div>
+      <div class="art"><img src="/img/luma.webp" alt="" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ---- Form settings ----
+   CONTACT_ENDPOINT: paste your Formspree form URL (https://formspree.io/f/xxxxxx) to send notes straight to your inbox.
+   NEWSLETTER_ENDPOINT: paste your newsletter signup URL (MailerLite/Formspree) the same way.
+   Until then, both forms open the visitor's email app addressed to Moon Pond. */
+const CONTACT_ENDPOINT = "";
+const NEWSLETTER_ENDPOINT = "";
+const INBOX = "moonpondtv@gmail.com";
+
+async function send(endpoint, data){
+  const r = await fetch(endpoint,{method:"POST",headers:{"Accept":"application/json"},body:data});
+  if(!r.ok) throw new Error("send failed");
+}
+document.getElementById("contact-form").addEventListener("submit", async e=>{
+  e.preventDefault(); const f=e.target, msg=f.querySelector(".form-msg"), d=new FormData(f);
+  if(CONTACT_ENDPOINT){
+    try{ await send(CONTACT_ENDPOINT,d); f.reset(); msg.textContent="Thank you! Your note floated over to the pond. We'll write back soon."; }
+    catch{ msg.textContent="Hmm, that didn't send. You can email us at "+INBOX+"."; }
+  } else {
+    location.href="mailto:"+INBOX+"?subject="+encodeURIComponent("Hello from "+d.get("name"))+"&body="+encodeURIComponent(d.get("message")+"\n\n"+d.get("name")+" ("+d.get("email")+")");
+    msg.textContent="Opening your email app...";
+  }
+});
+document.getElementById("news-form").addEventListener("submit", async e=>{
+  e.preventDefault(); const f=e.target, msg=document.getElementById("news-msg"), d=new FormData(f);
+  if(NEWSLETTER_ENDPOINT){
+    try{ await send(NEWSLETTER_ENDPOINT,d); f.reset(); msg.textContent="You're on the list. See you at the pond!"; }
+    catch{ msg.textContent="Hmm, that didn't go through. Please try again soon."; }
+  } else {
+    location.href="mailto:"+INBOX+"?subject="+encodeURIComponent("Newsletter signup")+"&body="+encodeURIComponent("Please add me to the Moon Pond newsletter: "+d.get("email"));
+    msg.textContent="Opening your email app...";
+  }
+});
+</script>
+</main>
+<footer class="footer"><div class="wrap">
+<p class="gn fredoka">Goodnight, Moon Pond.</p>
+<p class="love">And just remember... I love you to the moon and back.</p>
+<p>Gentle movement, breathing and bedtime play, made for families to enjoy together.</p>
+<nav><a href="/moonlight-reading/">Moonlight Reading</a><a href="/contact/">Contact</a><a href="https://www.youtube.com/@MoonPondKids">YouTube</a><a href="https://www.instagram.com/moonpondtv">Instagram</a><a href="https://www.tiktok.com/@moonpondtv">TikTok</a></nav>
+<small>&copy; 2026 Moon Pond &middot; moonpondtv.com</small>
+</div></footer>
+</body>
+</html>
