@@ -207,3 +207,27 @@ section{padding:90px 0}
 @media (max-width:1100px){.contact-top .wrap{grid-template-columns:1fr}.form-card{padding:32px 26px}}
 @media (max-width:760px){.news{grid-template-columns:1fr;padding:36px 26px}.news .art{width:160px;height:160px;order:-1}}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---- v2: floating contact, latest videos, intro buttons, routine sizing ---- */
+.float-contact{position:fixed;right:22px;bottom:22px;z-index:60;background:var(--plum);color:#fff;font-weight:800;text-decoration:none;padding:15px 24px;border-radius:999px;box-shadow:0 10px 30px rgba(93,42,81,.35);display:flex;align-items:center;gap:9px;font-size:17px;transition:transform .2s}
+.float-contact:hover{transform:translateY(-3px)}
+@media (max-width:600px){.float-contact{right:14px;bottom:14px;padding:12px 18px;font-size:16px}}
+.latest{padding:70px 0 80px}
+.video-grid{display:flex;flex-wrap:wrap;gap:26px;justify-content:center}
+.vcard{width:230px;text-decoration:none;display:block;transition:transform .2s}
+.vcard:hover{transform:translateY(-3px)}
+.vcard .thumb{position:relative;aspect-ratio:9/16;border-radius:24px;overflow:hidden;background:var(--lav-panel);box-shadow:0 10px 26px rgba(93,42,81,.14)}
+.vcard .thumb img{width:100%;height:100%;object-fit:cover}
+.vcard .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--plum);display:grid;place-items:center}
+.vcard h3{font-size:19px;margin-top:14px;line-height:1.25}
+.vcard p{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.35}
+.friend{display:flex;flex-direction:column;align-items:center}
+.friend > p:not(.role){margin-bottom:18px}
+.intro-btn{margin-top:auto;display:inline-flex;align-items:center;gap:6px;background:var(--plum);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:10px 16px;border-radius:999px}
+.intro-btn.soon{background:transparent;color:var(--ink);border:2px solid var(--lav)}
+.mood{min-height:0;padding-bottom:190px}
+.mood .star{position:absolute;left:32px;bottom:36px;padding:0;margin:0;max-width:48%}
+.mood img{right:26px;bottom:24px;width:140px!important;height:140px;object-fit:contain}
+.optout{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:2px 0 4px;cursor:pointer}
+.optout input{width:14px;height:14px;margin:0}
+.fine{font-size:12px;color:var(--muted);margin-bottom:20px}
